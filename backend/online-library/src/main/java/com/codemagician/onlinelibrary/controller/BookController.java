@@ -2,13 +2,12 @@ package com.codemagician.onlinelibrary.controller;
 
 import com.codemagician.onlinelibrary.service.BookService;
 import com.codemagician.onlinelibrary.service.dto.BookDTO;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @author Siuyun Yip
@@ -22,8 +21,14 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/all")
-    public List<BookDTO> getAllBook() {
-        return bookService.findAllBook();
+    /**
+     * search by pagination: /api/book?page=?&size=?
+     * or return default-size (i.e., 50) books: /api/book
+     * @param pageable
+     * @return
+     */
+    @GetMapping
+    public Page<BookDTO> listBook(Pageable pageable) {
+        return bookService.listBook(pageable);
     }
 }

@@ -2,6 +2,9 @@ package com.codemagician.onlinelibrary.util;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.util.Streamable;
 
 import java.util.Collection;
 import java.util.List;
@@ -63,13 +66,19 @@ public class ObjectMapperUtils {
     }
 
     /**
+     * <p>Note: outClass object must have default constructor with no arguments</p>
      * Maps {@code source} to {@code destination}.
      *
      * @param source      object to map from
      * @param destination object to map to
+     * @return new object of <code>outClass</code> type.
      */
     public static <S, D> D map(final S source, D destination) {
         modelMapper.map(source, destination);
         return destination;
+    }
+
+    public static <D, T> Page<D> mapPaginatedEntities(final Page<T> entityPage, Class<D> outCLass) {
+        return entityPage.map((e) -> map(e, outCLass));
     }
 }
