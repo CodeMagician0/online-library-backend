@@ -23,7 +23,7 @@ public class BookController {
 
     /**
      * search by pagination: /api/book?page=?&size=?
-     * or return default-size (i.e., 50) books: /api/book
+     * or return default-size (i.e., 3) books: /api/book
      * @param pageable
      * @return
      */

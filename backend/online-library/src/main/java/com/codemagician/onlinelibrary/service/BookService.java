@@ -1,10 +1,6 @@
 package com.codemagician.onlinelibrary.service;
 
-import com.codemagician.onlinelibrary.dao.entity.BookDO;
-import com.codemagician.onlinelibrary.dao.repo.BookRepository;
 import com.codemagician.onlinelibrary.service.dto.BookDTO;
-import com.codemagician.onlinelibrary.util.ObjectMapperUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,19 +12,18 @@ import java.util.List;
  * @version 1.0
  * @date 2023/6/18 13:20
  */
-@Service
-public class BookService {
+public interface BookService {
 
-    @Autowired
-    private BookRepository bookRepository;
+    /**
+     * retrieve all books
+     * @return
+     */
+    List<BookDTO> findAllBook();
 
-    public List<BookDTO> findAllBook() {
-        List<BookDO> books = bookRepository.findAll();
-        return ObjectMapperUtils.mapAll(books, BookDTO.class);
-    }
-
-    public Page<BookDTO> listBook(Pageable pageable) {
-        Page<BookDO> books = bookRepository.findAll(pageable);
-        return ObjectMapperUtils.mapPaginatedEntities(books, BookDTO.class);
-    }
+    /**
+     * retrieve all books by pagination
+     * @param pageable
+     * @return
+     */
+    Page<BookDTO> listBook(Pageable pageable);
 }
