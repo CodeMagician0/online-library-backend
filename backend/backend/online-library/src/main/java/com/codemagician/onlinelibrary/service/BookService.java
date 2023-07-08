@@ -1,0 +1,29 @@
+package com.codemagician.onlinelibrary.service;
+
+import com.codemagician.onlinelibrary.service.dto.BookDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * @author Siuyun Yip
+ * @version 1.0
+ * @date 2023/6/18 13:20
+ */
+public interface BookService {
+
+    /**
+     * retrieve all books
+     * @return
+     */
+    List<BookDTO> findAllBook();
+
+    /**
+     * retrieve all books by pagination
+     * @param pageable
+     * @return
+     */
+    Page<BookDTO> listBook(Pageable pageable);
+}
