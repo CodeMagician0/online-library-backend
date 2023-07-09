@@ -17,13 +17,29 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    public List<BookDTO> findAllBook() {
-        List<BookDO> books = bookRepository.findAll();
-        return ObjectMapperUtils.mapAll(books, BookDTO.class);
+    @Override
+    public List<String> getAllCategories() {
+        return bookRepository.getAllCategories();
     }
 
-    public Page<BookDTO> listBook(Pageable pageable) {
+    @Override
+    public Page<BookDTO> getAllBooks(Pageable pageable) {
         Page<BookDO> books = bookRepository.findAll(pageable);
+        return ObjectMapperUtils.mapPaginatedEntities(books, BookDTO.class);
+    }
+
+    @Override
+    public Page<BookDTO> searchBooks(String title, String category, Pageable pageable) {
+        Page<BookDO> books;
+        if (title == null && category == null) {
+            books = bookRepository.findAll(pageable);
+        } else if (title == null) {
+            books = bookRepository.findByCategoryIgnoreCase(category, pageable);
+        } else if (category == null) {
+            books = bookRepository.findByTitleContainingIgnoreCase(title, pageable);
+        } else {
+            books = bookRepository.findByTitleContainingIgnoreCaseAndCategoryIgnoreCase(title, category, pageable);
+        }
         return ObjectMapperUtils.mapPaginatedEntities(books, BookDTO.class);
     }
 }

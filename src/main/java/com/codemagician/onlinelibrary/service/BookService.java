@@ -3,7 +3,6 @@ package com.codemagician.onlinelibrary.service;
 import com.codemagician.onlinelibrary.service.dto.BookDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,15 +14,25 @@ import java.util.List;
 public interface BookService {
 
     /**
-     * retrieve all books
+     * Retrieve distinct categories
      * @return
      */
-    List<BookDTO> findAllBook();
+    List<String> getAllCategories();
 
     /**
-     * retrieve all books by pagination
+     * retrieve all books
      * @param pageable
      * @return
      */
-    Page<BookDTO> listBook(Pageable pageable);
+    Page<BookDTO> getAllBooks(Pageable pageable);
+
+    /**
+     * search books by title or/and category
+     * @param title
+     * @param category
+     * @param pageable
+     * @return
+     */
+    Page<BookDTO> searchBooks(String title, String category, Pageable pageable);
+
 }
