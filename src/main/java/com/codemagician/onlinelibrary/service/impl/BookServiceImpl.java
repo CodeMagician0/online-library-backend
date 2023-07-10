@@ -30,16 +30,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Page<BookDTO> searchBooks(String title, String category, Pageable pageable) {
-        Page<BookDO> books;
-        if (title == null && category == null) {
-            books = bookRepository.findAll(pageable);
-        } else if (title == null) {
-            books = bookRepository.findByCategoryIgnoreCase(category, pageable);
-        } else if (category == null) {
-            books = bookRepository.findByTitleContainingIgnoreCase(title, pageable);
-        } else {
-            books = bookRepository.findByTitleContainingIgnoreCaseAndCategoryIgnoreCase(title, category, pageable);
-        }
+        Page<BookDO> books = bookRepository.searchBooks(title, category, pageable);
         return ObjectMapperUtils.mapPaginatedEntities(books, BookDTO.class);
     }
 }
