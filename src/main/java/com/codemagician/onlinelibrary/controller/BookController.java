@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -31,8 +32,15 @@ public class BookController {
      * @return
      */
     @GetMapping("/categories")
-    List<String> getAllCategories() {
-        return bookService.getAllCategories();
+    ResponseEntity<HashMap<String, List<String>>> getAllCategories() {
+        try {
+            List<String> categories = bookService.getAllCategories();
+            HashMap<String, List<String>> response = new HashMap<>();
+            response.put("categories", categories);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -42,8 +50,13 @@ public class BookController {
      * @return
      */
     @GetMapping
-    public Page<BookDTO> getAllBooks(Pageable pageable) {
-        return bookService.getAllBooks(pageable);
+    public ResponseEntity<Page<BookDTO>> getAllBooks(Pageable pageable) {
+        try {
+            Page<BookDTO> books = bookService.getAllBooks(pageable);
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -57,9 +70,14 @@ public class BookController {
      * @return
      */
     @GetMapping("/search")
-    public Page<BookDTO> searchBooks(@RequestParam(required = false) String title,
+    public ResponseEntity<Page<BookDTO>> searchBooks(@RequestParam(required = false) String title,
                                      @RequestParam(required = false) String category,
                                      Pageable pageable) {
-        return bookService.searchBooks(title, category, pageable);
+        try {
+            Page<BookDTO> books = bookService.searchBooks(title, category, pageable);
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
