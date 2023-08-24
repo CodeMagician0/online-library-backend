@@ -1,4 +1,4 @@
-package com.codemagician.onlinelibrary.service.dto;
+package com.codemagician.onlinelibrary.service.vo;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2023/6/18 14:21
  */
 @Data
-public class BookDTO {
+public class BookVO {
 
     private Long id;
 
