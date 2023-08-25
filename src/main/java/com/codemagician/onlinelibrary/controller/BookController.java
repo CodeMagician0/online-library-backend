@@ -1,7 +1,7 @@
 package com.codemagician.onlinelibrary.controller;
 
 import com.codemagician.onlinelibrary.service.BookService;
-import com.codemagician.onlinelibrary.service.dto.BookDTO;
+import com.codemagician.onlinelibrary.service.vo.BookVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,34 +29,30 @@ public class BookController {
 
     /**
      * get all categories
+     *
      * @return
      */
     @GetMapping("/categories")
     ResponseEntity<HashMap<String, List<String>>> getAllCategories() {
-        try {
-            List<String> categories = bookService.getAllCategories();
-            HashMap<String, List<String>> response = new HashMap<>();
-            response.put("categories", categories);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        List<String> categories = bookService.getAllCategories();
+        HashMap<String, List<String>> response = new HashMap<>();
+        response.put("categories", categories);
+
+        return ResponseEntity.ok(response);
     }
 
     /**
      * search by pagination: /api/books?page=?&size=?
      * or return default-size (i.e., 3) books: /api/book
+     *
      * @param pageable
      * @return
      */
     @GetMapping
-    public ResponseEntity<Page<BookDTO>> getAllBooks(Pageable pageable) {
-        try {
-            Page<BookDTO> books = bookService.getAllBooks(pageable);
-            return new ResponseEntity<>(books, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<Page<BookVO>> getAllBooks(Pageable pageable) {
+        Page<BookVO> books = bookService.getAllBooks(pageable);
+
+        return ResponseEntity.ok(books);
     }
 
     /**
@@ -64,20 +60,18 @@ public class BookController {
      * /api/books?title=?&page=?&size=?
      * /api/books?category=?&page=?&size=?
      * /api/books?title=?&category=?&page=?&size=?
+     *
      * @param title
      * @param category
      * @param pageable
      * @return
      */
     @GetMapping("/search")
-    public ResponseEntity<Page<BookDTO>> searchBooks(@RequestParam(required = false) String title,
-                                     @RequestParam(required = false) String category,
-                                     Pageable pageable) {
-        try {
-            Page<BookDTO> books = bookService.searchBooks(title, category, pageable);
-            return new ResponseEntity<>(books, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<Page<BookVO>> searchBooks(@RequestParam(required = false) String title,
+                                                    @RequestParam(required = false) String category,
+                                                    Pageable pageable) {
+        Page<BookVO> books = bookService.searchBooks(title, category, pageable);
+
+        return ResponseEntity.ok(books);
     }
 }
