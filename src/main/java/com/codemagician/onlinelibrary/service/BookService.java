@@ -1,6 +1,6 @@
 package com.codemagician.onlinelibrary.service;
 
-import com.codemagician.onlinelibrary.service.dto.BookDTO;
+import com.codemagician.onlinelibrary.service.vo.BookVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -24,7 +24,7 @@ public interface BookService {
      * @param pageable
      * @return
      */
-    Page<BookDTO> getAllBooks(Pageable pageable);
+    Page<BookVO> getAllBooks(Pageable pageable);
 
     /**
      * search books by title or/and category
@@ -33,6 +33,6 @@ public interface BookService {
      * @param pageable
      * @return
      */
-    Page<BookDTO> searchBooks(String title, String category, Pageable pageable);
+    Page<BookVO> searchBooks(String title, String category, Pageable pageable);
 
 }

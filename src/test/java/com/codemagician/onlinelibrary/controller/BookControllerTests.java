@@ -1,8 +1,7 @@
 package com.codemagician.onlinelibrary.controller;
 
-import com.codemagician.onlinelibrary.dao.entity.BookDO;
 import com.codemagician.onlinelibrary.service.BookService;
-import com.codemagician.onlinelibrary.service.dto.BookDTO;
+import com.codemagician.onlinelibrary.service.vo.BookVO;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +47,10 @@ public class BookControllerTests {
 
     @Test
     void testGetAllBooks() throws Exception {
-        List<BookDTO> mockBookList = new ArrayList<>();
-        mockBookList.add(new BookDTO());
-        mockBookList.add(new BookDTO());
-        Page<BookDTO> mockPage = new PageImpl<>(mockBookList);
+        List<BookVO> mockBookList = new ArrayList<>();
+        mockBookList.add(new BookVO());
+        mockBookList.add(new BookVO());
+        Page<BookVO> mockPage = new PageImpl<>(mockBookList);
 
         Pageable pageable = PageRequest.of(0, 9); // Example pageable
         when(bookService.getAllBooks(pageable)).thenReturn(mockPage);
