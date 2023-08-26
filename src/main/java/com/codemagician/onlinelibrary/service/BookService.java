@@ -35,4 +35,26 @@ public interface BookService {
      */
     Page<BookVO> searchBooks(String title, String category, Pageable pageable);
 
+    /**
+     * checkout book throw NotFoundException
+     * @param userEmail
+     * @param bookId
+     * @return
+     */
+    BookVO checkoutBook(String userEmail, Long bookId);
+
+    /**
+     * validate the checkout state of the book with bookId
+     * @param userEmail
+     * @param bookId
+     * @return
+     */
+    Boolean validateCheckout(String userEmail, Long bookId);
+
+    /**
+     * get the number of current loans for user
+     * @param userEmail
+     * @return
+     */
+    int countCurrentLoans(String userEmail);
 }

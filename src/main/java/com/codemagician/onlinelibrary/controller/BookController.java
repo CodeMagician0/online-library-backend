@@ -7,10 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -74,4 +71,50 @@ public class BookController {
 
         return ResponseEntity.ok(books);
     }
+
+    /**
+     * checkout book
+     *
+     * /api/books/secure/checkout?bookId=?
+     * @param bookId
+     * @return
+     */
+    @PutMapping("/secure/checkout")
+    public  ResponseEntity<BookVO> checkoutBook(@RequestParam Long bookId) {
+        // @TODO user email should be extracted from JWT
+        String userEmail = "testuser@email.com";
+        BookVO book = bookService.checkoutBook(userEmail, bookId);
+
+        return ResponseEntity.ok(book);
+    }
+
+    /**
+     * check the checkout state of the book
+     * /api/books/secure/ischeckout/byuser
+     * @param bookId
+     * @return
+     */
+    @GetMapping("/secure/ischeckout/byuser")
+    public ResponseEntity<Boolean> validateCheckout(@RequestParam Long bookId) {
+        // @TODO user email should be extracted from JWT
+        String userEmail = "testuser@email.com";
+        Boolean isValid = bookService.validateCheckout(userEmail, bookId);
+
+        return ResponseEntity.ok(isValid);
+    }
+
+
+    /**
+     * get the number of loans of book for the user
+     * /api/books/secure/currentloans/count
+     * @return
+     */
+    @GetMapping("/secure/currentloans/count")
+    public int getCurrentLoans() {
+        // @TODO user email should be extracted from JWT
+        String userEmail = "testuser@email.com";
+
+        return bookService.countCurrentLoans(userEmail);
+    }
+
 }
