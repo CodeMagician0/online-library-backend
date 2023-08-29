@@ -23,7 +23,7 @@ public class GlobalRestExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = NotFoundException.class)
-    public ResponseEntity<String> businessExceptionHandler(NotFoundException e) {
+    public ResponseEntity<String> notFoundExceptionHandler(NotFoundException e) {
         return ResponseEntity.notFound().build();
     }
 
