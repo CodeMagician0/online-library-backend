@@ -13,8 +13,6 @@ import java.util.List;
  * @date 2023/8/25 18:08
  */
 public interface CheckoutRepository extends JpaRepository<CheckoutDO, Long> {
-    @Query("select checkout from CheckoutDO checkout " +
-            "where (:bookId is null or :bookId = checkout.bookId) and " +
-            "lower(:userEmail) = lower(checkout.userEmail)")
-    List<CheckoutDO> findByUserEmailAndBookId(String userEmail, Long bookId);
+    CheckoutDO findByUserEmailAndBookId(String userEmail, Long bookId);
+    int countByUserEmail(String userEmail);
 }

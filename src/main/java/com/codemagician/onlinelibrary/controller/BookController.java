@@ -98,23 +98,24 @@ public class BookController {
     public ResponseEntity<Boolean> validateCheckout(@RequestParam Long bookId) {
         // @TODO user email should be extracted from JWT
         String userEmail = "testuser@email.com";
-        Boolean isValid = bookService.validateCheckout(userEmail, bookId);
+        Boolean isCheckout = bookService.isCheckout(userEmail, bookId);
 
-        return ResponseEntity.ok(isValid);
+        return ResponseEntity.ok(isCheckout);
     }
 
 
     /**
      * get the number of loans of book for the user
-     * /api/books/secure/currentloans/count
+     * /api/books/secure/loans/count
      * @return
      */
-    @GetMapping("/secure/currentloans/count")
-    public int getCurrentLoans() {
+    @GetMapping("/secure/loans/count")
+    public ResponseEntity<Integer> getCurrentLoans() {
         // @TODO user email should be extracted from JWT
         String userEmail = "testuser@email.com";
+        int num = bookService.countCurrentLoans(userEmail);
 
-        return bookService.countCurrentLoans(userEmail);
+        return ResponseEntity.ok(num);
     }
 
 }

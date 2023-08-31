@@ -49,7 +49,7 @@ public interface BookService {
      * @param bookId
      * @return
      */
-    Boolean validateCheckout(String userEmail, Long bookId);
+    Boolean isCheckout(String userEmail, Long bookId);
 
     /**
      * get the number of current loans for user

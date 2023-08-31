@@ -52,7 +52,7 @@ public class BookServiceImpl implements BookService {
             throw new NotFoundException("Book doesn't exist");
         }
 
-        if (validateCheckout(userEmail, bookId)) {
+        if (isCheckout(userEmail, bookId)) {
             throw new BusinessException("Book already checked out by user");
         }
 
@@ -73,15 +73,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Boolean validateCheckout(String userEmail, Long bookId) {
-        List<CheckoutDO> checkout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
+    public Boolean isCheckout(String userEmail, Long bookId) {
+        CheckoutDO checkout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
 
-        return checkout.isEmpty();
+        return checkout != null;
     }
 
     @Override
     public int countCurrentLoans(String userEmail) {
-        return checkoutRepository.findByUserEmailAndBookId(userEmail, null).size();
+        return checkoutRepository.countByUserEmail(userEmail);
     }
 
 }
