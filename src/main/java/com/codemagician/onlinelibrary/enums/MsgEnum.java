@@ -8,6 +8,7 @@ package com.codemagician.onlinelibrary.enums;
 public enum MsgEnum {
 
     SUCCESS(200, "Successful"),
+    AUTH_ERROR(401, "Unauthorized"),
     ERROR(400, "Invalid Operation"),
     NOT_FOUND(404, "Resource Not Exist"),
     SYSTEM_ERROR(500, "System Error");
