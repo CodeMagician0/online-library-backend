@@ -1,6 +1,6 @@
 package com.codemagician.onlinelibrary.dao.repo;
 
-import com.codemagician.onlinelibrary.dao.entity.RoleDO;
+import com.codemagician.onlinelibrary.domain.entity.RoleDO;
 import com.codemagician.onlinelibrary.enums.RoleEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 

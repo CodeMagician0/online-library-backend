@@ -1,11 +1,10 @@
 package com.codemagician.onlinelibrary.dao.repo;
 
-import com.codemagician.onlinelibrary.dao.entity.ReviewDO;
+import com.codemagician.onlinelibrary.domain.entity.ReviewDO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Siuyun Yip

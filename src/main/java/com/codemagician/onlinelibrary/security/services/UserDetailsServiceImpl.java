@@ -1,6 +1,6 @@
 package com.codemagician.onlinelibrary.security.services;
 
-import com.codemagician.onlinelibrary.dao.entity.UserDO;
+import com.codemagician.onlinelibrary.domain.entity.UserDO;
 import com.codemagician.onlinelibrary.dao.repo.UserRepository;
 import com.codemagician.onlinelibrary.exception.AccessException;
 import org.springframework.beans.factory.annotation.Autowired;

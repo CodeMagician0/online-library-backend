@@ -1,7 +1,7 @@
 package com.codemagician.onlinelibrary.controller;
 
 import com.codemagician.onlinelibrary.service.ReviewService;
-import com.codemagician.onlinelibrary.service.vo.ReviewVO;
+import com.codemagician.onlinelibrary.domain.vo.ReviewVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

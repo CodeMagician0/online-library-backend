@@ -1,11 +1,7 @@
 package com.codemagician.onlinelibrary.dao.repo;
 
-import com.codemagician.onlinelibrary.dao.entity.CheckoutDO;
+import com.codemagician.onlinelibrary.domain.entity.CheckoutDO;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 /**
  * @author Siuyun Yip

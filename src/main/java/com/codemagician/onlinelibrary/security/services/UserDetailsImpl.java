@@ -1,6 +1,6 @@
 package com.codemagician.onlinelibrary.security.services;
 
-import com.codemagician.onlinelibrary.dao.entity.UserDO;
+import com.codemagician.onlinelibrary.domain.entity.UserDO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,8 +46,8 @@ public class UserDetailsImpl implements UserDetails {
 
         return new UserDetailsImpl(
                 user.getId(),
-                user.getUsername(),
                 user.getEmail(),
+                user.getUsername(),
                 user.getPassword(),
                 authorities
         );

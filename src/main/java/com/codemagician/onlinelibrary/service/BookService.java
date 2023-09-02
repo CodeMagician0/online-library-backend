@@ -1,6 +1,6 @@
 package com.codemagician.onlinelibrary.service;
 
-import com.codemagician.onlinelibrary.service.vo.BookVO;
+import com.codemagician.onlinelibrary.domain.vo.BookVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

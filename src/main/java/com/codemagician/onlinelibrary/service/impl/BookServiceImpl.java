@@ -1,13 +1,13 @@
 package com.codemagician.onlinelibrary.service.impl;
 
-import com.codemagician.onlinelibrary.dao.entity.BookDO;
-import com.codemagician.onlinelibrary.dao.entity.CheckoutDO;
+import com.codemagician.onlinelibrary.domain.entity.BookDO;
+import com.codemagician.onlinelibrary.domain.entity.CheckoutDO;
 import com.codemagician.onlinelibrary.dao.repo.BookRepository;
 import com.codemagician.onlinelibrary.dao.repo.CheckoutRepository;
 import com.codemagician.onlinelibrary.exception.BusinessException;
 import com.codemagician.onlinelibrary.exception.NotFoundException;
 import com.codemagician.onlinelibrary.service.BookService;
-import com.codemagician.onlinelibrary.service.vo.BookVO;
+import com.codemagician.onlinelibrary.domain.vo.BookVO;
 import com.codemagician.onlinelibrary.util.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

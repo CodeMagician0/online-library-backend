@@ -1,8 +1,8 @@
 package com.codemagician.onlinelibrary.service;
 
-import com.codemagician.onlinelibrary.dao.entity.BookDO;
+import com.codemagician.onlinelibrary.domain.entity.BookDO;
 import com.codemagician.onlinelibrary.dao.repo.BookRepository;
-import com.codemagician.onlinelibrary.service.dto.BookDTO;
+import com.codemagician.onlinelibrary.domain.vo.BookVO;
 import com.codemagician.onlinelibrary.service.impl.BookServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -57,7 +57,7 @@ public class BookServiceTests {
         when(bookRepository.findAll(pageable)).thenReturn(mockPage);
 
         Pageable pageRequest = PageRequest.of(0, 9);
-        List<BookDTO> books = bookService.getAllBooks(pageRequest).getContent();
+        List<BookVO> books = bookService.getAllBooks(pageRequest).getContent();
 
         assertThat(books.size(), equalTo(2));
 

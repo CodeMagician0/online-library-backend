@@ -1,6 +1,6 @@
 package com.codemagician.onlinelibrary.dao.repo;
 
-import com.codemagician.onlinelibrary.dao.entity.UserDO;
+import com.codemagician.onlinelibrary.domain.entity.UserDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
