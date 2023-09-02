@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2023/8/25 18:08
  */
 public interface CheckoutRepository extends JpaRepository<CheckoutDO, Long> {
-    CheckoutDO findByUserEmailAndBookId(String userEmail, Long bookId);
-    int countByUserEmail(String userEmail);
+    CheckoutDO findByUsernameAndBookId(String username, Long bookId);
+    int countByUsername(String username);
 }

@@ -46,13 +46,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookVO checkoutBook(String userEmail, Long bookId) {
+    public BookVO checkoutBook(String username, Long bookId) {
         Optional<BookDO> bookOpt = bookRepository.findById(bookId);
         if (!bookOpt.isPresent()) {
             throw new NotFoundException("Book doesn't exist");
         }
 
-        if (isCheckout(userEmail, bookId)) {
+        if (isCheckout(username, bookId)) {
             throw new BusinessException("Book already checked out by user");
         }
 
@@ -64,7 +64,7 @@ public class BookServiceImpl implements BookService {
         book.setCopiesAvailable(book.getCopiesAvailable() - 1);
         bookRepository.save(book);
 
-        CheckoutDO newCheckout = new CheckoutDO(userEmail, LocalDate.now().toString(),
+        CheckoutDO newCheckout = new CheckoutDO(username, LocalDate.now().toString(),
                 LocalDate.now().plusDays(7).toString(), book.getId());
 
         checkoutRepository.save(newCheckout);
@@ -73,15 +73,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Boolean isCheckout(String userEmail, Long bookId) {
-        CheckoutDO checkout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
+    public Boolean isCheckout(String username, Long bookId) {
+        CheckoutDO checkout = checkoutRepository.findByUsernameAndBookId(username, bookId);
 
         return checkout != null;
     }
 
     @Override
-    public int countCurrentLoans(String userEmail) {
-        return checkoutRepository.countByUserEmail(userEmail);
+    public int countCurrentLoans(String username) {
+        return checkoutRepository.countByUsername(username);
     }
 
 }

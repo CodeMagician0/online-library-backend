@@ -1,6 +1,8 @@
 package com.codemagician.onlinelibrary.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -20,8 +22,10 @@ public class ReviewDO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_email")
-    private String userEmail;
+    @Column(name = "username")
+    @NotBlank
+    @Size(max = 20)
+    private String username;
 
     @Column(name = "date")
     @CreationTimestamp

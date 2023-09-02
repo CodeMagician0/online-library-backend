@@ -21,9 +21,9 @@ public interface ReviewService {
 
     /**
      * find reviews by user email and bookId
-     * @param userEmail
+     * @param username
      * @param bookId
      * @return
      */
-    Page<ReviewVO> findByUserEmailAndBookId(String userEmail, Long bookId, Pageable pageable);
+    Page<ReviewVO> findByUsernameAndBookId(String username, Long bookId, Pageable pageable);
 }

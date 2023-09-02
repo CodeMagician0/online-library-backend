@@ -12,11 +12,8 @@ import org.springframework.data.jpa.repository.Query;
  * @date 2023/8/24 15:29
  */
 public interface ReviewRepository extends JpaRepository<ReviewDO, Long> {
-    @Query("select r from ReviewDO r where r.bookId = ?1")
+
     Page<ReviewDO> findByBookId(Long bookId, Pageable pageable);
 
-    @Query("select r from ReviewDO r " +
-            "where lower(r.userEmail) like lower(:userEmail)" +
-            "and r.bookId = :bookId")
-    Page<ReviewDO> findByUserEmailAndBookId(String userEmail, Long bookId, Pageable pageable);
+    Page<ReviewDO> findByUsernameAndBookId(String username, Long bookId, Pageable pageable);
 }

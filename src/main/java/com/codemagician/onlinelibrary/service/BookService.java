@@ -37,24 +37,24 @@ public interface BookService {
 
     /**
      * checkout book throw NotFoundException
-     * @param userEmail
+     * @param username
      * @param bookId
      * @return
      */
-    BookVO checkoutBook(String userEmail, Long bookId);
+    BookVO checkoutBook(String username, Long bookId);
 
     /**
      * validate the checkout state of the book with bookId
-     * @param userEmail
+     * @param username
      * @param bookId
      * @return
      */
-    Boolean isCheckout(String userEmail, Long bookId);
+    Boolean isCheckout(String username, Long bookId);
 
     /**
      * get the number of current loans for user
-     * @param userEmail
+     * @param username
      * @return
      */
-    int countCurrentLoans(String userEmail);
+    int countCurrentLoans(String username);
 }

@@ -30,8 +30,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Page<ReviewVO> findByUserEmailAndBookId(String userEmail, Long bookId, Pageable pageable) {
-        Page<ReviewDO> reviews = reviewRepository.findByUserEmailAndBookId(userEmail, bookId, pageable);
+    public Page<ReviewVO> findByUsernameAndBookId(String username, Long bookId, Pageable pageable) {
+        Page<ReviewDO> reviews = reviewRepository.findByUsernameAndBookId(username, bookId, pageable);
 
         return ObjectMapperUtils.mapPaginatedEntities(reviews, ReviewVO.class);
     }
