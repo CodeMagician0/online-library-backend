@@ -1,4 +1,4 @@
-package com.codemagician.onlinelibrary.dao.entity;
+package com.codemagician.onlinelibrary.domain.entity;
 
 import com.codemagician.onlinelibrary.enums.RoleEnum;
 import jakarta.persistence.*;

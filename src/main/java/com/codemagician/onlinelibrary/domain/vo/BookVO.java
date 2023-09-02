@@ -1,4 +1,4 @@
-package com.codemagician.onlinelibrary.service.vo;
+package com.codemagician.onlinelibrary.domain.vo;
 
 import lombok.Data;
 
