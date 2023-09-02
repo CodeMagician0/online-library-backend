@@ -1,7 +1,7 @@
 package com.codemagician.onlinelibrary.controller;
 
 import com.codemagician.onlinelibrary.service.BookService;
-import com.codemagician.onlinelibrary.service.vo.BookVO;
+import com.codemagician.onlinelibrary.domain.vo.BookVO;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
