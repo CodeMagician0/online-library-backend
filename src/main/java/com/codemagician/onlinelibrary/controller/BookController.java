@@ -1,12 +1,13 @@
 package com.codemagician.onlinelibrary.controller;
 
+import com.codemagician.onlinelibrary.security.jwt.JwtUtils;
 import com.codemagician.onlinelibrary.service.BookService;
-import com.codemagician.onlinelibrary.service.vo.BookVO;
+import com.codemagician.onlinelibrary.domain.vo.BookVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -23,6 +24,9 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     /**
      * get all categories
@@ -80,10 +84,10 @@ public class BookController {
      * @return
      */
     @PutMapping("/secure/checkout")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public  ResponseEntity<BookVO> checkoutBook(@RequestParam Long bookId) {
-        // @TODO user email should be extracted from JWT
-        String userEmail = "testuser@email.com";
-        BookVO book = bookService.checkoutBook(userEmail, bookId);
+        String username = jwtUtils.getUsernameFromJwtToken();
+        BookVO book = bookService.checkoutBook(username, bookId);
 
         return ResponseEntity.ok(book);
     }
@@ -95,10 +99,10 @@ public class BookController {
      * @return
      */
     @GetMapping("/secure/ischeckout/byuser")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Boolean> validateCheckout(@RequestParam Long bookId) {
-        // @TODO user email should be extracted from JWT
-        String userEmail = "testuser@email.com";
-        Boolean isCheckout = bookService.isCheckout(userEmail, bookId);
+        String username = jwtUtils.getUsernameFromJwtToken();
+        Boolean isCheckout = bookService.isCheckout(username, bookId);
 
         return ResponseEntity.ok(isCheckout);
     }
@@ -110,10 +114,10 @@ public class BookController {
      * @return
      */
     @GetMapping("/secure/loans/count")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Integer> getCurrentLoans() {
-        // @TODO user email should be extracted from JWT
-        String userEmail = "testuser@email.com";
-        int num = bookService.countCurrentLoans(userEmail);
+        String username = jwtUtils.getUsernameFromJwtToken();
+        int num = bookService.countCurrentLoans(username);
 
         return ResponseEntity.ok(num);
     }
