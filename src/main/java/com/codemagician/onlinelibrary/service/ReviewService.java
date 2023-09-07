@@ -1,5 +1,6 @@
 package com.codemagician.onlinelibrary.service;
 
+import com.codemagician.onlinelibrary.domain.rsp.ReviewWithUserInfoRsp;
 import com.codemagician.onlinelibrary.domain.vo.ReviewVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,13 +18,5 @@ public interface ReviewService {
      * @param pageable
      * @return
      */
-    Page<ReviewVO> findByBookId(Long bookId, Pageable pageable);
-
-    /**
-     * find reviews by user email and bookId
-     * @param username
-     * @param bookId
-     * @return
-     */
-    Page<ReviewVO> findByUsernameAndBookId(String username, Long bookId, Pageable pageable);
+    Page<ReviewWithUserInfoRsp> findByBookId(Long bookId, Pageable pageable);
 }

@@ -1,7 +1,7 @@
 package com.codemagician.onlinelibrary.controller;
 
+import com.codemagician.onlinelibrary.domain.rsp.ReviewWithUserInfoRsp;
 import com.codemagician.onlinelibrary.service.ReviewService;
-import com.codemagician.onlinelibrary.domain.vo.ReviewVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,8 +32,8 @@ public class ReviewController {
      * @return
      */
     @GetMapping("/{bookId}")
-    public ResponseEntity<Page<ReviewVO>> findReviewByBookId(@PathVariable Long bookId, Pageable pageable) {
-        Page<ReviewVO> reviews = reviewService.findByBookId(bookId, pageable);
+    public ResponseEntity<Page<ReviewWithUserInfoRsp>> findReviewByBookId(@PathVariable Long bookId, Pageable pageable) {
+        Page<ReviewWithUserInfoRsp> reviews = reviewService.findByBookId(bookId, pageable);
 
         return ResponseEntity.ok(reviews);
     }

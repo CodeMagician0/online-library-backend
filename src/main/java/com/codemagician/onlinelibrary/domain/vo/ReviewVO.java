@@ -14,8 +14,6 @@ public class ReviewVO {
 
     private Long id;
 
-    private String userEmail;
-
     private Date date;
 
     private double rating;
