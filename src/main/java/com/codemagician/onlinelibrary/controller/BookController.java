@@ -86,8 +86,8 @@ public class BookController {
     @PutMapping("/secure/checkout")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public  ResponseEntity<BookVO> checkoutBook(@RequestParam Long bookId) {
-        String username = jwtUtils.getUsernameFromJwtToken();
-        BookVO book = bookService.checkoutBook(username, bookId);
+        Long userId = jwtUtils.getUserIdFromContext();
+        BookVO book = bookService.checkoutBook(userId, bookId);
 
         return ResponseEntity.ok(book);
     }
@@ -101,12 +101,11 @@ public class BookController {
     @GetMapping("/secure/ischeckout/byuser")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Boolean> validateCheckout(@RequestParam Long bookId) {
-        String username = jwtUtils.getUsernameFromJwtToken();
-        Boolean isCheckout = bookService.isCheckout(username, bookId);
+        Long userId = jwtUtils.getUserIdFromContext();
+        Boolean isCheckout = bookService.isCheckout(userId, bookId);
 
         return ResponseEntity.ok(isCheckout);
     }
-
 
     /**
      * get the number of loans of book for the user
@@ -116,8 +115,8 @@ public class BookController {
     @GetMapping("/secure/loans/count")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Integer> getCurrentLoans() {
-        String username = jwtUtils.getUsernameFromJwtToken();
-        int num = bookService.countCurrentLoans(username);
+        Long userId = jwtUtils.getUserIdFromContext();
+        int num = bookService.countCurrentLoans(userId);
 
         return ResponseEntity.ok(num);
     }

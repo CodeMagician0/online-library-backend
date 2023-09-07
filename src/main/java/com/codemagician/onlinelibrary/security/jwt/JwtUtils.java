@@ -54,10 +54,10 @@ public class JwtUtils {
                 .parseClaimsJws(token).getBody().getSubject();
     }
 
-    public String getUsernameFromJwtToken() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public Long getUserIdFromContext() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        return userDetails.getUsername();
+        return userDetails.getId();
     }
 
     public boolean validateJwtToken(String authToken) {

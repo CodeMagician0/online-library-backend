@@ -1,8 +1,7 @@
 package com.codemagician.onlinelibrary.domain.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,8 +16,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CheckoutDO {
 
-    public CheckoutDO(String username, String checkoutDate, String returnDate, Long bookId) {
-        this.username = username;
+    public CheckoutDO(Long userId, String checkoutDate, String returnDate, Long bookId) {
+        this.user = new UserDO();
+        this.user.setId(userId);
         this.checkoutDate = checkoutDate;
         this.returnDate = returnDate;
         this.bookId = bookId;
@@ -28,11 +28,6 @@ public class CheckoutDO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max = 20)
-    @Column(name = "username")
-    private String username;
-
     @Column(name = "checkout_date")
     private String checkoutDate;
 
@@ -41,4 +36,8 @@ public class CheckoutDO {
 
     @Column(name = "book_id")
     private Long bookId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserDO user;
 }
