@@ -47,6 +47,12 @@ public class UserDO {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleDO> roles = new HashSet();
 
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<ReviewDO> reviews;
+//
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<CheckoutDO> checkouts;
+
     public UserDO(String username, String email, String password) {
         this.username = username;
         this.email = email;
