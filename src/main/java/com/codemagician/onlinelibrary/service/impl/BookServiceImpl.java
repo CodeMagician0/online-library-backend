@@ -74,9 +74,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Boolean isCheckout(Long userId, Long bookId) {
-        CheckoutDO checkout = checkoutRepository.findByUserIdAndBookId(userId, bookId);
-
-        return checkout != null;
+        return checkoutRepository.existsByUserIdAndBookId(userId, bookId);
     }
 
     @Override

@@ -10,5 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CheckoutRepository extends JpaRepository<CheckoutDO, Long> {
     CheckoutDO findByUserIdAndBookId(Long userId, Long bookId);
-    int countByUserId(Long userId);
+
+    Boolean existsByUserIdAndBookId(Long userId, Long bookId);
+
+    Integer countByUserId(Long userId);
 }
