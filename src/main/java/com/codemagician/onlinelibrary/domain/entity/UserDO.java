@@ -58,4 +58,8 @@ public class UserDO {
         this.email = email;
         this.password = password;
     }
+
+    public UserDO(Long userId) {
+        this.id = userId;
+    }
 }

@@ -16,8 +16,7 @@ import lombok.NoArgsConstructor;
 public class CheckoutDO {
 
     public CheckoutDO(Long userId, String checkoutDate, String returnDate, Long bookId) {
-        this.user = new UserDO();
-        this.user.setId(userId);
+        this.user = new UserDO(userId);
         this.checkoutDate = checkoutDate;
         this.returnDate = returnDate;
         this.bookId = bookId;
