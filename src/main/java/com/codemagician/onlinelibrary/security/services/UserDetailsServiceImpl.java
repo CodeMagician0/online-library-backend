@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws AccessException {
-        UserDO user = userRepository.findByUsername(username).orElseThrow(() -> new AccessException("User Not Found with username: " + username));
+        UserDO user = userRepository.findByUsernameWithRoles(username).orElseThrow(() -> new AccessException("User Not Found with username: " + username));
 
         return UserDetailsImpl.build(user);
     }

@@ -2,6 +2,7 @@ package com.codemagician.onlinelibrary.dao.repo;
 
 import com.codemagician.onlinelibrary.domain.entity.UserDO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
@@ -12,7 +13,9 @@ import java.util.Optional;
  */
 public interface UserRepository extends JpaRepository<UserDO, Long> {
 
-    Optional<UserDO> findByUsername(String username);
+    // use JOIN FETCH to resolve N+1 problem
+    @Query("select u from UserDO u JOIN FETCH u.roles where u.username = :username")
+    Optional<UserDO> findByUsernameWithRoles(String username);
 
     Boolean existsByUsername(String username);
 
