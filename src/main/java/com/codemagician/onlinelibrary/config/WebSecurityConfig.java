@@ -62,6 +62,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth ->
                   auth.requestMatchers("/api/books/secure/**").authenticated()
                       .requestMatchers("/api/reviews/secure/**").authenticated()
+                      .requestMatchers("/api/users/secure/**").authenticated()
                       .anyRequest().permitAll());
 
         http.authenticationProvider(authenticationProvider());

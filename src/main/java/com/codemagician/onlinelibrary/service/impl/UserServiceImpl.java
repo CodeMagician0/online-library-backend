@@ -6,12 +6,14 @@ import com.codemagician.onlinelibrary.domain.entity.RoleDO;
 import com.codemagician.onlinelibrary.domain.entity.UserDO;
 import com.codemagician.onlinelibrary.domain.req.SignupReq;
 import com.codemagician.onlinelibrary.domain.rsp.JwtRsp;
+import com.codemagician.onlinelibrary.domain.vo.UserVO;
 import com.codemagician.onlinelibrary.enums.RoleEnum;
 import com.codemagician.onlinelibrary.exception.BusinessException;
 import com.codemagician.onlinelibrary.security.jwt.JwtUtils;
 import com.codemagician.onlinelibrary.security.services.UserDetailsImpl;
 import com.codemagician.onlinelibrary.service.UserService;
 import com.codemagician.onlinelibrary.domain.req.LoginReq;
+import com.codemagician.onlinelibrary.util.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -49,6 +52,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Override
     public JwtRsp authenticateUser(LoginReq req) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword()));
@@ -70,6 +74,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
     public void registerUser(SignupReq req, boolean isAdmin) {
         if (userRepository.existsByUsername(req.getUsername())) {
             throw new BusinessException("Username was already taken.");
@@ -96,5 +101,16 @@ public class UserServiceImpl implements UserService {
 
         user.setRoles(roles);
         userRepository.save(user);
+    }
+
+    @Override
+    public UserVO getUser(Long userId) {
+        Optional<UserDO> userOption = userRepository.findById(userId);
+
+        if (!userOption.isPresent()) {
+            throw new BusinessException("User not exist");
+        }
+
+        return ObjectMapperUtils.map(userOption.get(), UserVO.class);
     }
 }

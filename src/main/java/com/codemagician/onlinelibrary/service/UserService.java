@@ -3,6 +3,7 @@ package com.codemagician.onlinelibrary.service;
 import com.codemagician.onlinelibrary.domain.req.LoginReq;
 import com.codemagician.onlinelibrary.domain.req.SignupReq;
 import com.codemagician.onlinelibrary.domain.rsp.JwtRsp;
+import com.codemagician.onlinelibrary.domain.vo.UserVO;
 
 /**
  * @author Siuyun Yip
@@ -26,4 +27,12 @@ public interface UserService {
      * @param isAdmin
      */
     void registerUser(SignupReq req, boolean isAdmin);
+
+    /**
+     * get user info
+     *
+     * @param userId
+     * @return
+     */
+    UserVO getUser(Long userId);
 }
