@@ -1,5 +1,6 @@
 package com.codemagician.onlinelibrary.security.jwt;
 
+import com.codemagician.onlinelibrary.exception.AccessException;
 import com.codemagician.onlinelibrary.security.services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -42,6 +43,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
+                // TODO fetch user data from Redis
                 UserDetails user = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
@@ -51,6 +53,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             logger.error("Cannot set user authentication {}", e);
+            throw new AccessException("Invalid token");
         }
 
         filterChain.doFilter(request, response);
