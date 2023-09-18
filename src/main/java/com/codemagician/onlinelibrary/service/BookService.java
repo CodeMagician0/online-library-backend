@@ -44,6 +44,13 @@ public interface BookService {
     BookVO checkoutBook(Long userId, Long bookId);
 
     /**
+     * get book info by bookId
+     * @param bookId
+     * @return
+     */
+    BookVO getBookInfo(Long bookId);
+
+    /**
      * validate the checkout state of the book with bookId
      * @param userId
      * @param bookId

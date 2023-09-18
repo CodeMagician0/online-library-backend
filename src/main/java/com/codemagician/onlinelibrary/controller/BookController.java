@@ -57,6 +57,17 @@ public class BookController {
     }
 
     /**
+     * get book info by bookId
+     * /api/books/info?bookId=
+     */
+    @GetMapping("/info")
+    public ResponseEntity<BookVO> getBookInfo(Long bookId) {
+        BookVO books = bookService.getBookInfo(bookId);
+
+        return ResponseEntity.ok(books);
+    }
+
+    /**
      * search by title or/and category
      * /api/books?title=?&page=?&size=?
      * /api/books?category=?&page=?&size=?

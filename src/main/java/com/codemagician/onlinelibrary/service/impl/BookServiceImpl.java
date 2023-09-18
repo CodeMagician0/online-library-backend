@@ -40,6 +40,19 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public BookVO getBookInfo(Long bookId) {
+        Optional<BookDO> bookOpt = bookRepository.findById(bookId);
+
+        if (!bookOpt.isPresent()) {
+            throw new NotFoundException("Book doesn't exist");
+        }
+
+        BookDO book = bookOpt.get();
+
+        return ObjectMapperUtils.map(book, BookVO.class);
+    }
+
+    @Override
     public Page<BookVO> searchBooks(String title, String category, Pageable pageable) {
         Page<BookDO> books = bookRepository.searchBooks(title, category, pageable);
         return ObjectMapperUtils.mapPaginatedEntities(books, BookVO.class);
