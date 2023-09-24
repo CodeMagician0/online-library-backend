@@ -35,12 +35,19 @@ public class ReviewDO {
         this.user = new UserDO(userId);
     }
 
+    public ReviewDO(Double rating, String reviewDescription, Long bookId, Long userId) {
+        this.rating = rating;
+        this.reviewDescription = reviewDescription;
+        this.bookId = bookId;
+        this.user = new UserDO(userId);
+    }
+
     @Column(name = "date")
     @CreationTimestamp
     private Date date;
 
     @Column(name = "rating")
-    private double rating;
+    private Double rating;
 
     @Column(name = "book_id")
     private Long bookId;

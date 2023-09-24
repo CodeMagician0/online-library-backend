@@ -2,6 +2,7 @@ package com.codemagician.onlinelibrary.service.impl;
 
 import com.codemagician.onlinelibrary.domain.entity.ReviewDO;
 import com.codemagician.onlinelibrary.dao.repo.ReviewRepository;
+import com.codemagician.onlinelibrary.domain.req.LeaveReviewReq;
 import com.codemagician.onlinelibrary.domain.rsp.ReviewWithUserInfoRsp;
 import com.codemagician.onlinelibrary.service.ReviewService;
 import com.codemagician.onlinelibrary.util.ObjectMapperUtils;
@@ -29,5 +30,20 @@ public class ReviewServiceImpl implements ReviewService {
         Page<ReviewDO> reviews = reviewRepository.findByBookId(bookId, pageable);
 
         return ObjectMapperUtils.mapPaginatedEntities(reviews, ReviewWithUserInfoRsp.class);
+    }
+
+    @Override
+    public Boolean isReviewLeftByUser(Long bookId, Long userId) {
+        Integer count = reviewRepository.countByBookIdAndUserId(userId, bookId);
+
+        return count >= 1;
+    }
+
+    @Override
+    public Boolean leaveReview(LeaveReviewReq req, Long userId) {
+        ReviewDO review = new ReviewDO(req.getRating(), req.getReviewDescription(), req.getBookId(), userId);
+        reviewRepository.save(review);
+
+        return true;
     }
 }

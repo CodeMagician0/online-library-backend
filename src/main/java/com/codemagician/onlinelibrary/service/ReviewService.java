@@ -1,5 +1,6 @@
 package com.codemagician.onlinelibrary.service;
 
+import com.codemagician.onlinelibrary.domain.req.LeaveReviewReq;
 import com.codemagician.onlinelibrary.domain.rsp.ReviewWithUserInfoRsp;
 import com.codemagician.onlinelibrary.domain.vo.ReviewVO;
 import org.springframework.data.domain.Page;
@@ -19,4 +20,8 @@ public interface ReviewService {
      * @return
      */
     Page<ReviewWithUserInfoRsp> findByBookId(Long bookId, Pageable pageable);
+
+    Boolean isReviewLeftByUser(Long bookId, Long userId);
+
+    Boolean leaveReview(LeaveReviewReq req, Long userId);
 }

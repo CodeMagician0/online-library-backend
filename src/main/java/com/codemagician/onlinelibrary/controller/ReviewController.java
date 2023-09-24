@@ -1,15 +1,18 @@
 package com.codemagician.onlinelibrary.controller;
 
+import com.codemagician.onlinelibrary.domain.req.LeaveReviewReq;
 import com.codemagician.onlinelibrary.domain.rsp.ReviewWithUserInfoRsp;
+import com.codemagician.onlinelibrary.enums.MsgEnum;
+import com.codemagician.onlinelibrary.security.jwt.JwtUtils;
 import com.codemagician.onlinelibrary.service.ReviewService;
+import com.codemagician.onlinelibrary.util.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Siuyun Yip
@@ -24,17 +27,47 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
     /**
      * find reviews by book Id
-     * /api/reviews/1?&page=?&size=?
+     * /api/reviews?bookId=?&page=?&size=?
+     *
      * @param bookId
      * @param pageable
      * @return
      */
-    @GetMapping("/{bookId}")
-    public ResponseEntity<Page<ReviewWithUserInfoRsp>> findReviewByBookId(@PathVariable Long bookId, Pageable pageable) {
+    @GetMapping
+    public ResponseEntity findReviewByBookId(@RequestParam Long bookId, Pageable pageable) {
         Page<ReviewWithUserInfoRsp> reviews = reviewService.findByBookId(bookId, pageable);
 
-        return ResponseEntity.ok(reviews);
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, reviews);
     }
+
+    /**
+     * check whether user had comment
+     * /api/reviews/secure/iscomment/byuser?bookId=?
+     *
+     * @param bookId
+     * @return
+     */
+    @GetMapping("/secure/iscomment/byuser")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity isCommentByUser(@RequestParam Long bookId) {
+        Long userId = jwtUtils.getUserIdFromContext();
+        Boolean isReviewLeftByUser = reviewService.isReviewLeftByUser(bookId, userId);
+
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, isReviewLeftByUser);
+    }
+
+    @PostMapping("/secure/comment")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity leaveReview(@RequestBody LeaveReviewReq req) {
+        Long userId = jwtUtils.getUserIdFromContext();
+        Boolean isSuccess = reviewService.leaveReview(req, userId);
+
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, isSuccess);
+    }
+
 }
