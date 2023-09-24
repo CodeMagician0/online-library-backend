@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class ResponseWrapper {
 
-    public static ResponseEntity<Object> get(String message, HttpStatus status, Object responseObj) {
+    public static ResponseEntity<Object> build(String message, HttpStatus status, Object responseObj) {
         Map<String, Object> map = new HashMap();
         map.put("message", message);
         map.put("status", status.value());

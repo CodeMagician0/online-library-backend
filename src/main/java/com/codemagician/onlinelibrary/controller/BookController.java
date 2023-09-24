@@ -1,11 +1,14 @@
 package com.codemagician.onlinelibrary.controller;
 
+import com.codemagician.onlinelibrary.enums.MsgEnum;
 import com.codemagician.onlinelibrary.security.jwt.JwtUtils;
 import com.codemagician.onlinelibrary.service.BookService;
 import com.codemagician.onlinelibrary.domain.vo.BookVO;
+import com.codemagician.onlinelibrary.util.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -89,47 +92,50 @@ public class BookController {
 
     /**
      * checkout book
-     *
+     * <p>
      * /api/books/secure/checkout?bookId=?
+     *
      * @param bookId
      * @return
      */
     @PutMapping("/secure/checkout")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public  ResponseEntity<BookVO> checkoutBook(@RequestParam Long bookId) {
+    public ResponseEntity checkoutBook(@RequestParam Long bookId) {
         Long userId = jwtUtils.getUserIdFromContext();
         BookVO book = bookService.checkoutBook(userId, bookId);
 
-        return ResponseEntity.ok(book);
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, book);
     }
 
     /**
      * check the checkout state of the book
-     * /api/books/secure/ischeckout/byuser
+     * /api/books/secure/ischeckout/byuser/?bookId=?
+     *
      * @param bookId
      * @return
      */
     @GetMapping("/secure/ischeckout/byuser")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<Boolean> validateCheckout(@RequestParam Long bookId) {
+    public ResponseEntity validateCheckout(@RequestParam Long bookId) {
         Long userId = jwtUtils.getUserIdFromContext();
         Boolean isCheckout = bookService.isCheckout(userId, bookId);
 
-        return ResponseEntity.ok(isCheckout);
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, isCheckout);
     }
 
     /**
      * get the number of loans of book for the user
      * /api/books/secure/loans/count
+     *
      * @return
      */
     @GetMapping("/secure/loans/count")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<Integer> getCurrentLoans() {
+    public ResponseEntity getCurrentLoans() {
         Long userId = jwtUtils.getUserIdFromContext();
         int num = bookService.countCurrentLoans(userId);
 
-        return ResponseEntity.ok(num);
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, num);
     }
 
 }

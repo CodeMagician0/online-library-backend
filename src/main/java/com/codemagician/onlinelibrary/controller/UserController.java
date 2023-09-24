@@ -35,6 +35,6 @@ public class UserController {
         Long userId = jwtUtils.getUserIdFromContext();
         UserVO user = userService.getUser(userId);
 
-        return ResponseWrapper.get(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, user);
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, user);
     }
 }

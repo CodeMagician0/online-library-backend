@@ -37,7 +37,7 @@ public class AuthController {
     public ResponseEntity authenticateUser(@Valid @RequestBody LoginReq req) {
         JwtRsp jwtRsp = userService.authenticateUser(req);
 
-        return ResponseWrapper.get(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, jwtRsp);
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, jwtRsp);
     }
 
     /**
@@ -52,7 +52,7 @@ public class AuthController {
     public ResponseEntity registerUser(@Valid @RequestBody SignupReq req) {
         userService.registerUser(req, false);
 
-        return ResponseWrapper.get(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, "Registered Successfully");
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, "Registered Successfully");
     }
 
     /**
@@ -67,6 +67,6 @@ public class AuthController {
     public ResponseEntity registerAdmin(@Valid @RequestBody SignupReq req) {
         userService.registerUser(req, true);
 
-        return ResponseWrapper.get(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, "Admin Registered Successfully");
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, "Admin Registered Successfully");
     }
 }
