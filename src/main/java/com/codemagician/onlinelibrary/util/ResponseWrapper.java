@@ -1,6 +1,5 @@
 package com.codemagician.onlinelibrary.util;
 
-import com.codemagician.onlinelibrary.enums.MsgEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -21,5 +20,13 @@ public class ResponseWrapper {
         map.put("data", responseObj);
 
         return new ResponseEntity(map, status);
+    }
+
+    public static ResponseEntity success() {
+        Map<String, Object> map = new HashMap();
+        map.put("message", "success");
+        map.put("status", 200);
+
+        return new ResponseEntity(map, HttpStatus.OK);
     }
 }

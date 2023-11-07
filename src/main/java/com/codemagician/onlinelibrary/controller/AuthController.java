@@ -3,7 +3,7 @@ package com.codemagician.onlinelibrary.controller;
 import com.codemagician.onlinelibrary.domain.req.LoginReq;
 import com.codemagician.onlinelibrary.domain.req.SignupReq;
 import com.codemagician.onlinelibrary.domain.rsp.JwtRsp;
-import com.codemagician.onlinelibrary.enums.MsgEnum;
+import com.codemagician.onlinelibrary.common.enums.MsgEnum;
 import com.codemagician.onlinelibrary.service.UserService;
 import com.codemagician.onlinelibrary.util.ResponseWrapper;
 import jakarta.validation.Valid;

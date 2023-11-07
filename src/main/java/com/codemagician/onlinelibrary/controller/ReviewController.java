@@ -2,7 +2,7 @@ package com.codemagician.onlinelibrary.controller;
 
 import com.codemagician.onlinelibrary.domain.req.LeaveReviewReq;
 import com.codemagician.onlinelibrary.domain.rsp.ReviewWithUserInfoRsp;
-import com.codemagician.onlinelibrary.enums.MsgEnum;
+import com.codemagician.onlinelibrary.common.enums.MsgEnum;
 import com.codemagician.onlinelibrary.security.jwt.JwtUtils;
 import com.codemagician.onlinelibrary.service.ReviewService;
 import com.codemagician.onlinelibrary.util.ResponseWrapper;

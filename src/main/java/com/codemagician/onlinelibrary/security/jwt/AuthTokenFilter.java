@@ -1,6 +1,6 @@
 package com.codemagician.onlinelibrary.security.jwt;
 
-import com.codemagician.onlinelibrary.exception.AccessException;
+import com.codemagician.onlinelibrary.common.exception.AccessException;
 import com.codemagician.onlinelibrary.security.services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,6 +1,7 @@
 package com.codemagician.onlinelibrary.controller;
 
-import com.codemagician.onlinelibrary.enums.MsgEnum;
+import com.codemagician.onlinelibrary.domain.rsp.CurrentLoansRsp;
+import com.codemagician.onlinelibrary.common.enums.MsgEnum;
 import com.codemagician.onlinelibrary.security.jwt.JwtUtils;
 import com.codemagician.onlinelibrary.service.BookService;
 import com.codemagician.onlinelibrary.domain.vo.BookVO;
@@ -107,6 +108,7 @@ public class BookController {
         return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, book);
     }
 
+
     /**
      * check the checkout state of the book
      * /api/books/secure/ischeckout/byuser/?bookId=?
@@ -122,6 +124,33 @@ public class BookController {
 
         return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, isCheckout);
     }
+
+    @GetMapping("/secure/currentloans")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity currentLoans() {
+        Long userId = jwtUtils.getUserIdFromContext();
+        List<CurrentLoansRsp> currentLoansRspList = bookService.currentLoans(userId);
+        return ResponseWrapper.build(MsgEnum.SUCCESS.getMsg(), HttpStatus.OK, currentLoansRspList);
+    }
+
+    @PutMapping("/secure/return")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity returnBook(@RequestParam Long bookId) {
+        Long userId = jwtUtils.getUserIdFromContext();
+        bookService.returnBook(bookId, userId);
+
+        return ResponseWrapper.success();
+    }
+
+    @PutMapping("/secure/renew/loan")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity renewLoan(@RequestParam Long bookId) {
+        Long userId = jwtUtils.getUserIdFromContext();
+        bookService.renewLoan(bookId, userId);
+
+        return ResponseWrapper.success();
+    }
+
 
     /**
      * get the number of loans of book for the user

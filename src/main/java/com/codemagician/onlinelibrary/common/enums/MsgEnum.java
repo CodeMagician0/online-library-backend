@@ -1,4 +1,4 @@
-package com.codemagician.onlinelibrary.enums;
+package com.codemagician.onlinelibrary.common.enums;
 
 /**
  * @author Siuyun Yip

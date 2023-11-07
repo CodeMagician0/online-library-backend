@@ -1,6 +1,6 @@
 package com.codemagician.onlinelibrary.domain.entity;
 
-import com.codemagician.onlinelibrary.enums.RoleEnum;
+import com.codemagician.onlinelibrary.common.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

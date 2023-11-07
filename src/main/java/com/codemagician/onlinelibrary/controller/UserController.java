@@ -1,7 +1,7 @@
 package com.codemagician.onlinelibrary.controller;
 
 import com.codemagician.onlinelibrary.domain.vo.UserVO;
-import com.codemagician.onlinelibrary.enums.MsgEnum;
+import com.codemagician.onlinelibrary.common.enums.MsgEnum;
 import com.codemagician.onlinelibrary.security.jwt.JwtUtils;
 import com.codemagician.onlinelibrary.service.UserService;
 import com.codemagician.onlinelibrary.util.ResponseWrapper;

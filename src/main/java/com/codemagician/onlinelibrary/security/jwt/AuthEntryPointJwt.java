@@ -1,13 +1,11 @@
 package com.codemagician.onlinelibrary.security.jwt;
 
-import com.codemagician.onlinelibrary.exception.AccessException;
+import com.codemagician.onlinelibrary.common.exception.AccessException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 /**
  * @author Siuyun Yip

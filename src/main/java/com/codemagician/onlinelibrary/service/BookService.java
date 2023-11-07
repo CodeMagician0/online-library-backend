@@ -1,5 +1,6 @@
 package com.codemagician.onlinelibrary.service;
 
+import com.codemagician.onlinelibrary.domain.rsp.CurrentLoansRsp;
 import com.codemagician.onlinelibrary.domain.vo.BookVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -57,6 +58,30 @@ public interface BookService {
      * @return
      */
     Boolean isCheckout(Long userId, Long bookId);
+
+    /**
+     * get loaned books by userId
+     *
+     * @param userId
+     * @return
+     */
+    List<CurrentLoansRsp> currentLoans(Long userId);
+
+    /**
+     * return book
+     *
+     * @param bookId
+     * @param  userId
+     */
+    void returnBook(Long bookId, Long userId);
+
+    /**
+     * renew loan for user
+     *
+     * @param bookId
+     * @param userId
+     */
+    void renewLoan(Long bookId, Long userId);
 
     /**
      * get the number of current loans for user

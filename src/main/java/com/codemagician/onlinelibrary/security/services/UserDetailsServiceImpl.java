@@ -2,7 +2,7 @@ package com.codemagician.onlinelibrary.security.services;
 
 import com.codemagician.onlinelibrary.domain.entity.UserDO;
 import com.codemagician.onlinelibrary.dao.repo.UserRepository;
-import com.codemagician.onlinelibrary.exception.AccessException;
+import com.codemagician.onlinelibrary.common.exception.AccessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

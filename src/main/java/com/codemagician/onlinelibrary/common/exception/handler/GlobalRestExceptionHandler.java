@@ -1,8 +1,7 @@
-package com.codemagician.onlinelibrary.handler;
+package com.codemagician.onlinelibrary.common.exception.handler;
 
-import com.codemagician.onlinelibrary.enums.MsgEnum;
-import com.codemagician.onlinelibrary.exception.BusinessException;
-import com.codemagician.onlinelibrary.exception.NotFoundException;
+import com.codemagician.onlinelibrary.common.exception.BusinessException;
+import com.codemagician.onlinelibrary.common.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

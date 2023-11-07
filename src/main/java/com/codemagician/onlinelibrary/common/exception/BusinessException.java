@@ -1,6 +1,6 @@
-package com.codemagician.onlinelibrary.exception;
+package com.codemagician.onlinelibrary.common.exception;
 
-import com.codemagician.onlinelibrary.enums.MsgEnum;
+import com.codemagician.onlinelibrary.common.enums.MsgEnum;
 
 /**
  * @author Siuyun Yip
