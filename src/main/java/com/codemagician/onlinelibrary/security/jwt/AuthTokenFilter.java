@@ -43,7 +43,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
-                // TODO fetch user data from Redis
                 UserDetails user = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import java.util.Set;
  * @date 2023/8/31 15:39
  */
 
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -23,7 +25,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
-public class UserDO {
+public class UserDO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

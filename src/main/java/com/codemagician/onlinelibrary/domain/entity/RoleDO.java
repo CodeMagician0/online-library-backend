@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @author Siuyun Yip
  * @version 1.0
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "roles")
-public class RoleDO {
+public class RoleDO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
